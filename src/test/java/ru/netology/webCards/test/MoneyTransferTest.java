@@ -17,25 +17,25 @@ import static ru.netology.webCards.page.DashboardPage.pushCardIdFirst;
 public class MoneyTransferTest {
 
     @BeforeEach
-            void set() {
-    open("http://localhost:9999");
-    val loginPage = new LoginPage();
-    val authInfo = DataHelper.getAuthInfo();
-    val verificationPage = loginPage.validLogin(authInfo);
-    val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-    val cardBalancePage = verificationPage.validVerify(verificationCode);
+    void set() {
+        open("http://localhost:9999");
+        val loginPage = new LoginPage();
+        val authInfo = DataHelper.getAuthInfo();
+        val verificationPage = loginPage.validLogin(authInfo);
+        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val cardBalancePage = verificationPage.validVerify(verificationCode);
     }
 
     @Test
     void shouldTransferMoneyOnSecondCard() {
-    val dashboardPage = new DashboardPage();
-    int invoiceAmount = 3000;
-    val transferMoneyPage = pushCardIdSecond();
-    transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberFirst());
+        val dashboardPage = new DashboardPage();
+        int invoiceAmount = 3000;
+        val transferMoneyPage = pushCardIdSecond();
+        transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberFirst());
         val cardFirstBalanceFinal = dashboardPage.getCardBalanceFirst();
-    val cardSecondBalanceFinal = dashboardPage.getCardBalanceSecond();
-    assertEquals(cardFirstBalanceFinal, dashboardPage.getCardBalanceFirst());
-    assertEquals(cardSecondBalanceFinal, dashboardPage.getCardBalanceSecond());
+        val cardSecondBalanceFinal = dashboardPage.getCardBalanceSecond();
+        assertEquals(cardFirstBalanceFinal, dashboardPage.getCardBalanceFirst());
+        assertEquals(cardSecondBalanceFinal, dashboardPage.getCardBalanceSecond());
     }
 
     @Test
@@ -56,10 +56,7 @@ public class MoneyTransferTest {
         int invoiceAmount = 0;
         val transferMoneyPage = pushCardIdFirst();
         transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
-        val cardSecondBalanceFinal = dashboardPage.getCardBalanceSecond();
-        val cardFirstBalanceFinal = dashboardPage.getCardBalanceFirst();
-        assertEquals(cardSecondBalanceFinal, dashboardPage.getCardBalanceSecond());
-        assertEquals(cardFirstBalanceFinal, dashboardPage.getCardBalanceFirst());
+        transferMoneyPage.errorLimit();
     }
 
     @Test

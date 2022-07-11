@@ -11,14 +11,14 @@ public class LoginPage {
     private SelenideElement loginButton = $("[data-test-id=action-login]");
 
 
-    public VerificationPage validLogin (DataHelper.AuthInfo authInfo) {
-    //$("[data-test-id=login] input").setValue(authInfo.getLogin());
-    //$("[data-test-id=password] input").setValue(authInfo.getPassword());
-    //$("[data-test-id=action-login] input").click();
-       loginField.setValue(authInfo.getLogin());
-       passwordField.setValue(authInfo.getPassword());
-       loginButton.click();
-    return new VerificationPage();
+    public VerificationPage validLogin(DataHelper.AuthInfo authInfo) {
+        //$("[data-test-id=login] input").setValue(authInfo.getLogin());
+        //$("[data-test-id=password] input").setValue(authInfo.getPassword());
+        //$("[data-test-id=action-login] input").click();
+        loginField.setValue(authInfo.getLogin());
+        passwordField.setValue(authInfo.getPassword());
+        loginButton.click();
+        return new VerificationPage();
     }
 
 }

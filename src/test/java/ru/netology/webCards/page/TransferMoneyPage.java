@@ -13,18 +13,18 @@ public class TransferMoneyPage {
     private SelenideElement whence = $("[data-test-id=from] input");
     private SelenideElement transfer = $("[data-test-id=action-transfer]");
 
-public void moneyTransfer(int invoiceAmount, DataHelper.CardInfo from) {
-    amount.setValue(valueOf(invoiceAmount));
-    whence.setValue(String.valueOf(from));
-    transfer.click();
-    new DashboardPage();
-}
+    public void moneyTransfer(int invoiceAmount, DataHelper.CardInfo from) {
+        amount.setValue(valueOf(invoiceAmount));
+        whence.setValue(String.valueOf(from));
+        transfer.click();
+        new DashboardPage();
+    }
 
-public void errorLimit() {
-    $(".notification__content").should(Condition.exactText("Ошибка"));
-}
+    public void errorLimit() {
+        $(".notification__content").should(Condition.exactText("Ошибка"));
+    }
 
-public void invalidCard() {
-    $(".notification__content").should(Condition.text("Ошибка! Произошла ошибка"));
-}
+    public void invalidCard() {
+        $(".notification__content").should(Condition.text("Ошибка! Произошла ошибка"));
+    }
 }

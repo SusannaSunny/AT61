@@ -38,15 +38,16 @@ public class MoneyTransferTest {
         assertEquals(10000, dashboardPage.getCardBalanceFirst());
     }
 
-    @Test
-    void shouldTransferMoneyOnFirstCard() {
-        val dashboardPage = new DashboardPage();
-        int invoiceAmount = 5000;
-        val transferMoneyPage = pushCardIdFirst();
-        transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
-        assertEquals(5000, dashboardPage.getCardBalanceSecond());
-        assertEquals(15000, dashboardPage.getCardBalanceFirst());
-    }
+   // @Test
+   // void shouldTransferMoneyOnFirstCard() {
+   //     val dashboardPage = new DashboardPage();
+   //     int invoiceAmount = 5000;
+   //     val transferMoneyPage = pushCardIdFirst();
+   //     transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
+   //     assertEquals(5000, dashboardPage.getCardBalanceSecond());
+   //     assertEquals(15000, dashboardPage.getCardBalanceFirst());
+   // }
+
 
     @Test
     void shouldTransferZeroMoneyOnFirstCard() {

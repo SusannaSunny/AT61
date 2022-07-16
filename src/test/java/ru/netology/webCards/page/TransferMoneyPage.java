@@ -2,6 +2,7 @@ package ru.netology.webCards.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 import ru.netology.webCards.data.DataHelper;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -15,6 +16,13 @@ public class TransferMoneyPage {
 
     public void moneyTransfer(int invoiceAmount, DataHelper.CardInfo from) {
         amount.setValue(valueOf(invoiceAmount));
+        whence.setValue(String.valueOf(from));
+        transfer.click();
+        new DashboardPage();
+    }
+    public void moneyTransferClick(DataHelper.CardInfo from) {
+        whence.sendKeys(Keys.LEFT_CONTROL + "A");
+        whence.sendKeys(Keys.BACK_SPACE);
         whence.setValue(String.valueOf(from));
         transfer.click();
         new DashboardPage();

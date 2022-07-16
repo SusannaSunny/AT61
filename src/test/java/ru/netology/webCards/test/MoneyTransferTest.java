@@ -27,15 +27,15 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferMoneyOnSecondCard() {
+    void shouldTransferMoneyOnSecondFirstCard() {
         val dashboardPage = new DashboardPage();
-        int invoiceAmount = 3000;
+        int invoiceAmount = 5000;
         val transferMoneyPage = pushCardIdSecond();
         transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberFirst());
-        val cardFirstBalanceFinal = dashboardPage.getCardBalanceFirst();
-        val cardSecondBalanceFinal = dashboardPage.getCardBalanceSecond();
-        assertEquals(cardFirstBalanceFinal, dashboardPage.getCardBalanceFirst());
-        assertEquals(cardSecondBalanceFinal, dashboardPage.getCardBalanceSecond());
+        val transferMoneyPageAway = pushCardIdFirst();
+        transferMoneyPageAway.moneyTransferClick(getCardNumberSecond());
+        assertEquals(10000, dashboardPage.getCardBalanceSecond());
+        assertEquals(10000, dashboardPage.getCardBalanceFirst());
     }
 
     @Test
@@ -44,10 +44,8 @@ public class MoneyTransferTest {
         int invoiceAmount = 5000;
         val transferMoneyPage = pushCardIdFirst();
         transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
-        val cardSecondBalanceFinal = dashboardPage.getCardBalanceSecond();
-        val cardFirstBalanceFinal = dashboardPage.getCardBalanceFirst();
-        assertEquals(cardSecondBalanceFinal, dashboardPage.getCardBalanceSecond());
-        assertEquals(cardFirstBalanceFinal, dashboardPage.getCardBalanceFirst());
+        assertEquals(5000, dashboardPage.getCardBalanceSecond());
+        assertEquals(15000, dashboardPage.getCardBalanceFirst());
     }
 
     @Test
@@ -65,9 +63,6 @@ public class MoneyTransferTest {
         int invoiceAmount = 6000;
         val transferMoneyPage = pushCardIdFirst();
         transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberFirst());
-        val cardFirstBalanceFinal = dashboardPage.getCardBalanceFirst();
-        val cardSecondBalanceFinal = dashboardPage.getCardBalanceSecond();
-        assertEquals(cardFirstBalanceFinal, dashboardPage.getCardBalanceFirst());
-        assertEquals(cardSecondBalanceFinal, dashboardPage.getCardBalanceSecond());
+        transferMoneyPage.invalidCard();
     }
 }

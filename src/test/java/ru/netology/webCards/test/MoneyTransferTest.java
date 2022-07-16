@@ -50,7 +50,7 @@ public class MoneyTransferTest {
 
     @Test
     void shouldTransferZeroMoneyOnFirstCard() {
-        val dashboardPage = new DashboardPage();
+        //val dashboardPage = new DashboardPage();
         int invoiceAmount = 0;
         val transferMoneyPage = pushCardIdFirst();
         transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
@@ -59,7 +59,7 @@ public class MoneyTransferTest {
 
     @Test
     void shouldTransferMoneyFromFirstOnFirstCard() {
-        val dashboardPage = new DashboardPage();
+        //val dashboardPage = new DashboardPage();
         int invoiceAmount = 6000;
         val transferMoneyPage = pushCardIdFirst();
         transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberFirst());

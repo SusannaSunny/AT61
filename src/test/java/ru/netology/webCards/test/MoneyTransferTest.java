@@ -26,27 +26,22 @@ public class MoneyTransferTest {
         val cardBalancePage = verificationPage.validVerify(verificationCode);
     }
 
+
     @Test
     void shouldTransferMoneyOnSecondFirstCard() {
         val dashboardPage = new DashboardPage();
         int invoiceAmount = 5000;
-        val transferMoneyPage = pushCardIdSecond();
-        transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberFirst());
-        val transferMoneyPageAway = pushCardIdFirst();
-        transferMoneyPageAway.moneyTransferClick(getCardNumberSecond());
-        assertEquals(10000, dashboardPage.getCardBalanceSecond());
-        assertEquals(10000, dashboardPage.getCardBalanceFirst());
+        int expectedBalanceFirstCard = dashboardPage.getCardBalanceFirst();
+        int expectedBalanceSecondCard = dashboardPage.getCardBalanceSecond();
+        val transferMoneyPage = pushCardIdFirst();
+        transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
+        assertEquals(expectedBalanceFirstCard + invoiceAmount, dashboardPage.getCardBalanceFirst());
+        assertEquals(expectedBalanceSecondCard - invoiceAmount, dashboardPage.getCardBalanceSecond());
+        val transferMoneyPageAway = pushCardIdSecond();
+        transferMoneyPageAway.moneyTransferClick(getCardNumberFirst());
+        assertEquals(expectedBalanceFirstCard, dashboardPage.getCardBalanceFirst());
+        assertEquals(expectedBalanceSecondCard, dashboardPage.getCardBalanceSecond());
     }
-
-   // @Test
-   // void shouldTransferMoneyOnFirstCard() {
-   //     val dashboardPage = new DashboardPage();
-   //     int invoiceAmount = 5000;
-   //     val transferMoneyPage = pushCardIdFirst();
-   //     transferMoneyPage.moneyTransfer(invoiceAmount, getCardNumberSecond());
-   //     assertEquals(5000, dashboardPage.getCardBalanceSecond());
-   //     assertEquals(15000, dashboardPage.getCardBalanceFirst());
-   // }
 
 
     @Test

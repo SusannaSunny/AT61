@@ -14,9 +14,13 @@ public class DashboardPage {
     private static SelenideElement cardIdFirst = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] .button");
     private static SelenideElement cardIdSecond = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] .button");
 
-    private ElementsCollection cards = $$(".list__item div");
-    private final String balanceStart = "баланс: ";
-    private final String balanceFinish = " р.";
+    private ElementsCollection cardsF = $$("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']");
+    private final String balanceStartNF = " баланс: ";
+    private final String balanceFinishNF = " р.";
+
+    private ElementsCollection cardsS = $$("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']");
+    private final String balanceStartNS = " баланс: ";
+    private final String balanceFinishNS = " р.";
 
     public DashboardPage() {
     }
@@ -32,20 +36,26 @@ public class DashboardPage {
     }
 
     public int getCardBalanceFirst() {
-        val text = cards.first().text();
-        return benefitBalance(text);
+        val textF = cardsF.first().text();
+        return benefitBalanceF(textF);
     }
 
     public int getCardBalanceSecond() {
-        val text = cards.first().text();
-        return benefitBalance(text);
+        val textS = cardsS.first().text();
+        return benefitBalanceS(textS);
     }
 
-    private int benefitBalance(String text) {
-        val start = text.indexOf(balanceStart);
-        val finish = text.indexOf(balanceFinish);
-        val value = text.substring(start + balanceStart.length(), finish);
-        return Integer.parseInt(value);
+    private int benefitBalanceF(String text) {
+        val startF = text.indexOf(balanceStartNF);
+        val finishF = text.indexOf(balanceFinishNF);
+        val valueF = text.substring(startF + balanceStartNF.length(), finishF);
+        return Integer.parseInt(valueF);
+    }
+    private int benefitBalanceS(String text) {
+        val startS = text.indexOf(balanceStartNS);
+        val finishS = text.indexOf(balanceFinishNS);
+        val valueS = text.substring(startS + balanceStartNS.length(), finishS);
+        return Integer.parseInt(valueS);
     }
 
 }
